@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#087f52">
+<title>Dukaan Udhar Hisab</title>
+<style>
+:root{--green:#087f52;--deep:#075c3d;--mint:#e6f7ee;--bg:#f5f8f6;--ink:#15231d;--muted:#748078;--line:#e5ebe7;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+header{background:linear-gradient(135deg,var(--deep),#0b9a62);color:#fff;padding:20px 17px 28px;border-radius:0 0 25px 25px}
+.top{display:flex;align-items:center;gap:12px}.logo{width:47px;height:47px;border-radius:15px;background:#ffffff24;display:grid;place-items:center;font-size:25px}
+h1{font-size:21px;margin:0;font-weight:800;letter-spacing:-.3px}header p{margin:3px 0 0;color:#d7f4e5;font-size:13px}
+.wrap{max-width:620px;margin:auto;padding:0 15px 30px}.total-card{margin-top:-13px;position:relative;background:white;border-radius:20px;padding:19px;box-shadow:0 7px 24px #123b2612;border:1px solid #e8f1eb}
+.eyebrow{font-size:13px;color:var(--muted)}.total{font-size:34px;font-weight:850;letter-spacing:-1px;margin-top:3px;color:var(--deep)}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:13px 0 18px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px}.stat span{font-size:12px;color:var(--muted)}.stat strong{display:block;font-size:18px;margin-top:5px}
+.panel{background:white;border:1px solid var(--line);border-radius:19px;padding:17px;margin-bottom:17px;box-shadow:0 3px 14px #173b2608}.panel h2{font-size:17px;margin:0 0 15px}
+label{display:block;font-size:13px;font-weight:750;margin-bottom:7px}input{width:100%;font:inherit;font-size:16px;border:1px solid #dbe4de;background:#fbfdfb;border-radius:12px;padding:13px 12px;color:var(--ink);min-height:49px}
+.field{margin-bottom:14px}.amount-wrap{display:flex;align-items:center;border:1px solid #dbe4de;background:#fbfdfb;border-radius:12px;padding-left:13px}.amount-wrap b{font-size:18px}.amount-wrap input{border:0;background:transparent;outline:none}
+button{font:inherit;border:0;cursor:pointer;border-radius:13px;padding:13px 15px;font-weight:750}.primary{width:100%;background:linear-gradient(100deg,#0a8e5b,#08774c);color:white;box-shadow:0 5px 12px #087f5225}.secondary{background:var(--mint);color:var(--deep)}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.section-head h2{margin:0;font-size:17px}.link{color:var(--green);background:transparent;padding:6px;font-size:13px}
+.entry{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--line)}.entry:last-child{border-bottom:0;padding-bottom:0}.calendar{width:42px;height:42px;border-radius:13px;background:var(--mint);color:var(--green);display:grid;place-items:center;font-size:21px;flex-shrink:0}
+.info{flex:1;min-width:0}.date{font-size:14px;font-weight:700}.small{font-size:12px;color:var(--muted);margin-top:3px}.money{font-size:15px;font-weight:800;white-space:nowrap}.row-actions{display:flex;gap:5px;margin-left:4px}.icon-btn{background:#f0f4f1;color:#52645a;padding:7px;border-radius:9px;font-size:12px}
+.empty{text-align:center;color:var(--muted);padding:22px 8px;font-size:14px}.history-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:13px}.history-controls input{font-size:13px;padding:10px}
+nav{position:sticky;bottom:0;display:flex;justify-content:space-around;background:#fffffff0;backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:9px 8px calc(9px + env(safe-area-inset-bottom));max-width:620px;margin:auto}
+nav button{background:transparent;color:#758078;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 19px}nav button span{font-size:20px}nav button.active{background:var(--mint);color:var(--deep)}
+.page{display:none}.page.active{display:block}.download{width:100%;margin-top:12px}.hint{font-size:12px;line-height:1.5;color:var(--muted);margin:11px 1px 0}
+@media(min-width:600px){body{padding-bottom:15px}.wrap{padding-top:0}header{padding-left:max(17px,calc((100% - 590px)/2));padding-right:max(17px,calc((100% - 590px)/2))}}
+</style></head><body>
+<header><div class="top"><div class="logo">🛒</div><div><h1>Dukaan Udhar Hisab</h1><p>Sirf Date aur Amount · Aasaan hisaab</p></div></div></header>
+<main class="wrap">
+<section id="home" class="page active">
+ <div class="total-card"><div class="eyebrow">Aapka Kul Udhar / Total Amount</div><div class="total" id="grandTotal">₹0</div></div>
+ <div class="stats"><div class="stat"><span>Is Mahine ka hisaab</span><strong id="monthTotal">₹0</strong></div><div class="stat"><span>Total Entries</span><strong id="entryCount">0</strong></div></div>
+ <div class="panel"><h2 id="formHeading">＋ Nayi Entry Add Karein</h2>
+  <form id="entryForm">
+   <div class="field"><label for="date">📅 Date / तारीख</label><input id="date" type="date" required></div>
+   <div class="field"><label for="amount">💰 Amount / रकम (₹)</label><div class="amount-wrap"><b>₹</b><input id="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="Amount daalein" required></div></div>
+   <button class="primary" id="saveBtn" type="submit">Save Entry ✓</button>
+   <button class="secondary" id="cancelEdit" type="button" style="display:none;width:100%;margin-top:8px">Cancel Edit</button>
+  </form>
+ </div>
+ <div class="panel"><div class="section-head"><h2>Recent Entries</h2><button class="link" onclick="showPage('history')">Sab Dekhein →</button></div><div id="recentList"></div></div>
+</section>
+<section id="history" class="page">
+ <div class="panel"><div class="section-head"><h2>📅 Saari Entries</h2><button class="link" onclick="downloadCSV()">Backup ↓</button></div>
+ <div class="total-card" style="margin:0 0 14px;background:var(--mint);box-shadow:none;border:0"><div class="eyebrow">Total Amount</div><div class="total" id="historyTotal">₹0</div></div>
+ <div class="history-controls"><input id="from" type="date" aria-label="From date"><input id="to" type="date" aria-label="To date"></div><button class="secondary" style="width:100%;margin-bottom:12px" onclick="clearFilters()">Filter Saaf Karein</button><div id="allList"></div>
+ <button class="secondary download" onclick="downloadCSV()">⬇ Excel / CSV Backup Download</button>
+ <p class="hint">Aapka record isi mobile ke browser mein save hota hai. Backup ko samay-samay par download karte rahein.</p>
+ </div>
+</section>
+<section id="summary" class="page">
+ <div class="panel"><h2>📊 Hisaab Summary</h2><div class="entry"><div class="calendar">₹</div><div class="info"><div class="date">Kul Amount</div><div class="small">Sabhi entries ka total</div></div><div class="money" id="sumTotal">₹0</div></div><div class="entry"><div class="calendar">📆</div><div class="info"><div class="date">Is Mahine ka Total</div><div class="small">Current month entries</div></div><div class="money" id="sumMonth">₹0</div></div><div class="entry"><div class="calendar">🧾</div><div class="info"><div class="date">Total Entries</div><div class="small">Ab tak save ki gayi entries</div></div><div class="money" id="sumCount">0</div></div>
+ <button class="secondary download" onclick="downloadCSV()">⬇ Backup Download Karein</button><button class="secondary download" onclick="if(confirm('Saara hisaab hamesha ke liye delete karna hai?')){entries=[];localStorage.removeItem(KEY);render()}">Saara Data Delete Karein</button></div>
+</section>
+</main>
+<nav><button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button><button data-page="history" onclick="showPage('history')"><span>▤</span>History</button><button data-page="summary" onclick="showPage('summary')"><span>▥</span>Summary</button></nav>
+<script>
+const KEY='dukaan_date_amount_v2';let entries=[],editing=null;
+const $=id=>document.getElementById(id);
+const today=()=>{let d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+const money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:'INR',maximumFractionDigits:2}).format(Number(n)||0);
+const dateFmt=s=>{if(!s)return '';let [y,m,d]=s.split('-');return `${d} ${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][+m-1]} ${y}`};
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===page));document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));window.scrollTo({top:0,behavior:'smooth'});render()}
+function persist(){localStorage.setItem(KEY,JSON.stringify(entries))}
+function entryHTML(e){let div=document.createElement('div');div.className='entry';let cal=document.createElement('div');cal.className='calendar';cal.textContent='▦';let info=document.createElement('div');info.className='info';let dt=document.createElement('div');dt.className='date';dt.textContent=dateFmt(e.date);let small=document.createElement('div');small.className='small';small.textContent='Samaan ka udhar';info.append(dt,small);let amount=document.createElement('div');amount.className='money';amount.textContent=money(e.amount);let actions=document.createElement('div');actions.className='row-actions';let edit=document.createElement('button');edit.className='icon-btn';edit.textContent='Edit';edit.onclick=()=>editEntry(e.id);let del=document.createElement('button');del.className='icon-btn';del.textContent='✕';del.setAttribute('aria-label','Delete entry');del.onclick=()=>deleteEntry(e.id);actions.append(edit,del);div.append(cal,info,amount,actions);return div}
+function fillList(el,list){el.innerHTML='';if(!list.length){let e=document.createElement('div');e.className='empty';e.textContent='Abhi koi entry nahi hai. Pehla hisaab add karein.';el.append(e);return}list.forEach(e=>el.append(entryHTML(e)))}
+function render(){let total=entries.reduce((s,e)=>s+Number(e.amount),0),month=entries.filter(e=>e.date.slice(0,7)===today().slice(0,7)).reduce((s,e)=>s+Number(e.amount),0);['grandTotal','historyTotal','sumTotal'].forEach(id=>$(id).textContent=money(total));['monthTotal','sumMonth'].forEach(id=>$(id).textContent=money(month));['entryCount','sumCount'].forEach(id=>$(id).textContent=entries.length);let sorted=[...entries].sort((a,b)=>b.date.localeCompare(a.date)||b.created-a.created);fillList($('recentList'),sorted.slice(0,5));let from=$('from').value,to=$('to').value;fillList($('allList'),sorted.filter(e=>(!from||e.date>=from)&&(!to||e.date<=to)))}
+function resetForm(){editing=null;$('entryForm').reset();$('date').value=today();$('formHeading').textContent='＋ Nayi Entry Add Karein';$('saveBtn').textContent='Save Entry ✓';$('cancelEdit').style.display='none'}
+$('entryForm').addEventListener('submit',ev=>{ev.preventDefault();let amount=Number($('amount').value);if(!(amount>0)){alert('Amount zero se zyada daalein.');return}let record={id:editing||String(Date.now()),date:$('date').value,amount,created:Date.now()};if(editing)entries=entries.map(e=>e.id===editing?{...e,...record}:e);else entries.push(record);persist();resetForm();render();showPage('home')});
+function editEntry(id){let e=entries.find(x=>x.id===id);if(!e)return;editing=id;$('date').value=e.date;$('amount').value=e.amount;$('formHeading').textContent='✎ Entry Edit Karein';$('saveBtn').textContent='Update Entry ✓';$('cancelEdit').style.display='block';showPage('home')}
+$('cancelEdit').onclick=resetForm;
+function deleteEntry(id){if(!confirm('Is entry ko delete karna hai?'))return;entries=entries.filter(e=>e.id!==id);persist();render()}
+function clearFilters(){$('from').value='';$('to').value='';render()}
+$('from').onchange=render;$('to').onchange=render;
+function downloadCSV(){let rows=[['Date','Amount (INR)'],...entries.sort((a,b)=>a.date.localeCompare(b.date)).map(e=>[e.date,e.amount])];let csv='\ufeff'+rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');let url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8;'}));let a=document.createElement('a');a.href=url;a.download='Dukaan_Udhar_Hisab.csv';a.click();URL.revokeObjectURL(url)}
+try{entries=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){entries=[]}resetForm();render();
+</script></body></html>
